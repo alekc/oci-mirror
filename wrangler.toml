@@ -1,0 +1,7 @@
+name = "oci-mirror"
+main = "src/index.js"
+compatibility_date = "2026-08-29"
+
+routes = [
+  { pattern = "charts.alekc.dev/v2/*", zone_name = "alekc.dev" }
+]
