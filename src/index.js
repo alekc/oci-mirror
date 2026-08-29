@@ -90,13 +90,12 @@ export default {
       return new Response("not found", { status: 404 });
     }
 
-    const headers = new Headers();
-    const auth = request.headers.get("Authorization");
-    if (auth) headers.set("Authorization", auth);
-
+    // Forward the whole request, not just Authorization: registries
+    // content-negotiate the manifest format via Accept, dropping it
+    // makes GitLab serve a format helm/docker didn't ask for.
     const resp = await fetch(UPSTREAM + upstreamPath, {
       method: request.method,
-      headers,
+      headers: request.headers,
       redirect: "follow",
     });
 
